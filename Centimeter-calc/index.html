@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+  </head>
+  <body class="bg-secondary">
+    <div class="container mt-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-4 col-12">
+          <div class="card bg-dark p-3 rounded-3 shadow">
+            <div
+              class="card-title p-3 text-white fw-bold fs-2 border-bottom border-1 shadow"
+            >
+              Centimeter Calculator
+            </div>
+
+            <div class="card-body">
+              <div class="">
+                <p class="text-white-50">From this :</p>
+                <input
+                  class="form-control"
+                  type="text"
+                  id="inputCm"
+                  placeholder="cm"
+                />
+              </div>
+
+              <p class="text-white-50 mt-3">To this :</p>
+
+              <div class="d-flex justify-content-between">
+                <p
+                  class="p-2 bg-white rounded-start d-inline-block w-75 text-black-50"
+                >
+                  Result >><span
+                    class="fw-bold text-black overflow-y-auto flex-nowrap"
+                    id="result"
+                  ></span>
+                </p>
+                <select
+                  style="height: fit-content"
+                  class="form-select d-inline-block w-25 rounded-end-0 p-2 btn btn-primary"
+                  name=""
+                  id="select"
+                >
+                  <option value="m" class="active">m</option>
+                  <option value="km">km</option>
+                  <option value="mm">mm</option>
+                  <option value="inches">inches</option>
+                </select>
+              </div>
+
+              <div class="mt-4 d-flex justify-content-center">
+                <button
+                  class="btn btn-outline-warning rounded-0 fs-6 d-inline-block w-25"
+                  id="store"
+                >
+                  store->
+                </button>
+                <div class=" p-2 bg-white d-inline-block w-75">
+                  <ul class="list-unstyled fw-bold" id="results"></ul>
+                </div>
+              </div>
+              <p class="text-white-50 mt-1">You can store your answer here :</p>
+
+              <div class="card-footer">
+                <div class="mt-3 d-flex justify-content-center">
+                  <button class="btn btn-primary mx-3 fs-5" id="convertBtn">
+                    CONVERT
+                  </button>
+                  <button class="btn btn-outline-danger fs-5" id="resetBtn">
+                    RESET
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const inputCm = document.getElementById("inputCm");
+      const Result = document.getElementById("result");
+      const convertBtn = document.getElementById("convertBtn");
+      const Select = document.getElementById("select");
+      const resetBtn = document.getElementById("resetBtn");
+      const storeBtn = document.getElementById("store");
+      const Results = document.getElementById("results");
+
+      convertBtn.onclick = () => {
+        if (Select.value === "m") {
+          const result = inputCm.value / 100 + " " +  "m";
+          Result.innerText = result;
+        } else if (Select.value === "km") {
+          const result = inputCm.value / 100000 + " " + "km";
+          Result.innerText = result;
+        } else if (Select.value === "mm") {
+          const result = inputCm.value * 10 + " " + "mm";
+          Result.innerText = result;
+        } else if (Select.value === "inches") {
+            const result = inputCm.value * 0.3937007874+ " " + "inches";
+            Result.innerText = result;
+        }
+      };
+
+      resetBtn.onclick = () => {
+        Results.innerText = Result.innerText = inputCm.value = null ;
+      };
+
+      storeBtn.onclick = () => {
+        // storeDate.innerHTML = `<li>{Result.innerText}</li>`
+        if (inputCm.value && result.innerText) {
+          Results.innerHTML += `<li>${inputCm.value} cm = ${result.innerText}</li>`;
+          result.innerText = inputCm.value = null;
+        } else {
+            window.alert("you can't storeDate before convert")
+        }
+      };
+
+      Select.onclick = () => {
+        Result.innerText = inputCm.value = null;
+      };
+    </script>
+  </body>
+</html>
